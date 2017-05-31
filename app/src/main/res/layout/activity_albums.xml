@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/hf"
+    tools:context="derkaoui.coms.facebook.myphotos.AlbumsActivity">
+
+    <TextView
+        android:id="@+id/hi_user"
+        android:layout_width="377dp"
+        android:layout_height="51dp"
+        android:text="List of Albums"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        android:textSize="25dp"
+        tools:layout_editor_absoluteX="4dp"
+        tools:layout_editor_absoluteY="32dp"
+        android:layout_marginTop="46dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <GridView
+        android:id="@+id/grid"
+        android:layout_width="368dp"
+        android:layout_height="412dp"
+        android:columnWidth="100dp"
+        android:numColumns="2"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="91dp"
+        android:layout_below="@+id/hi_user"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>
