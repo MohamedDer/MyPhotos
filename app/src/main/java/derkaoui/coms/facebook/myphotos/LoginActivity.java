@@ -43,7 +43,6 @@ import static derkaoui.coms.facebook.myphotos.R.id.imageView;
 
 public class LoginActivity extends AppCompatActivity {
     static ArrayList<Album>  Albums = new ArrayList<Album>();
-    static String User;
 
     CallbackManager callbackManager = CallbackManager.Factory.create();
 
@@ -54,42 +53,30 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        // set components, GoToAlbums button invisible while user not logged in
         TextView tv = (TextView) findViewById(R.id.tv2);
         tv.setTypeface(EasyFonts.walkwayBold(this));
-
         final Button gotoalbums = (Button) findViewById(R.id.btt);
         gotoalbums.setVisibility(View.INVISIBLE);
 
         LoginButton loginButton = (LoginButton) findViewById(R.id.login_button);
         //loginButton.setReadPermissions("user_photos");
         LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile","user_photos"));
-        // Callback registration
 
+        // Callback registration, includes album's processing
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             private ProfileTracker userTrack;
             @Override
             public void onSuccess(LoginResult loginResult) {
 
-                //get current user
-                 userTrack = new ProfileTracker() {
-                    @Override
-                    protected void onCurrentProfileChanged(Profile oldProfile, Profile currentProfile) {
-                        Log.d("facebook - profile  : ", currentProfile.getFirstName());userTrack.stopTracking();
-                        LoginActivity.User = currentProfile.getFirstName()+"  ";
-                    }};
-
-                //get user albums and send them to the Albums Activity
-
+                //get user albums
                 StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
                 StrictMode.setThreadPolicy(policy);
                 getAlbums();
 
-                Log.d("Albums size" ,""+LoginActivity.Albums.size());
-
+                //Send albums to Album Activity
                 final Intent gotoAlbumAct = new Intent(LoginActivity.this,AlbumsActivity.class);
-                gotoAlbumAct.putExtra("User",LoginActivity.User);
                 gotoAlbumAct.putParcelableArrayListExtra("Albums",LoginActivity.Albums);
-
                 gotoalbums.setVisibility(View.VISIBLE);
                 gotoalbums.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -97,11 +84,6 @@ public class LoginActivity extends AppCompatActivity {
                         startActivity(gotoAlbumAct);
                     }
                 });
-
-
-
-
-
                 startActivity(gotoAlbumAct);
 
             }
@@ -117,32 +99,28 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        //if the user is logged out, the GoToAlbums button is hidden
         AccessTokenTracker accessTokenTracker = new AccessTokenTracker() {
             @Override
             protected void onCurrentAccessTokenChanged(
                     AccessToken oldAccessToken,
                     AccessToken currentAccessToken) {
-
                 if (currentAccessToken == null){
                     gotoalbums.setVisibility(View.INVISIBLE);
                 }
             }
         };
 
-
-
-
-
-
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void  onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
 
+    //get current user's albums
     public void getAlbums(){
         new GraphRequest(AccessToken.getCurrentAccessToken(), "me/albums", null, HttpMethod.GET, new GraphRequest.Callback() {
             public void onCompleted(GraphResponse response) {
@@ -156,10 +134,10 @@ public class LoginActivity extends AppCompatActivity {
                                 LoginActivity.Albums.add(new Album(AlbumJSON.getString("name"),AlbumJSON.getString("id")));
                                 Log.d("Added album  name  ", LoginActivity.Albums.get(i).name);
 
-
+                                /* Get photos of the i th album
                                 StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
                                 StrictMode.setThreadPolicy(policy);
-                                getPhotos(i);
+                                getPhotos(i);  */
                             }
                         }
                     } else {
@@ -172,14 +150,14 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
         ).executeAndWait();
-
     }
 
+    //get current album's photos
     public void getPhotos(final int j){
 
         Bundle parameters = new Bundle();
         parameters.putString("fields", "images");
-        new GraphRequest(AccessToken.getCurrentAccessToken(),"/10208596975422212/photos", parameters, HttpMethod.GET, new GraphRequest.Callback() {
+        new GraphRequest(AccessToken.getCurrentAccessToken(),"/"+Albums.get(j).id +"/photos", parameters, HttpMethod.GET, new GraphRequest.Callback() {
             public void onCompleted(GraphResponse response) {
                 try {
                     if (response.getError() == null) {
@@ -188,7 +166,7 @@ public class LoginActivity extends AppCompatActivity {
                         for (int i = 0; i < respJSONData.length(); i++) {
                             String url = respJSONData.getJSONObject(i).getJSONArray("images").getJSONObject(0).getString("source");
                             LoginActivity.Albums.get(j).photosurl.add(url);
-                            Log.d("Added Photo"+LoginActivity.Albums.get(j).photosurl ,"   Album name"+LoginActivity.Albums.get(j).name);
+                            Log.d("Added Photo"+LoginActivity.Albums.get(j).photosurl ,"   ");
                         }
                     }
 
@@ -198,8 +176,9 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
             }  }).executeAndWait();
-
     }
+
+
 
 
 
