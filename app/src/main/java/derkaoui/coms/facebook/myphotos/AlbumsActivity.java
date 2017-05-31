@@ -21,10 +21,7 @@ import java.util.ArrayList;
 
 public class AlbumsActivity extends AppCompatActivity {
 
-    GridView gridview;
 
-    public static String[] AlbumName ;
-    public static String[] AlbumImage ;
     ArrayList<Album> MyAlbum;
     String[] names ;
     String[] images ;
@@ -35,31 +32,26 @@ public class AlbumsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_albums);
 
+        //get Albums
         MyAlbum = getIntent().getParcelableArrayListExtra("Albums");
-        String user = getIntent().getStringExtra("User");
 
         names = new String[MyAlbum.size()];
         images = new String[MyAlbum.size()];
 
         for (int i=0;i<MyAlbum.size();i++){
             names[i]=MyAlbum.get(i).name;
-            images[i]="http://static.ccm2.net/www.commentcamarche.net/_skin/_local/img/logo.png?201402061805 ";
+            // I added a photo manually, due to the problem in getImages()
+            images[i]="http://i.imgur.com/DvpvklR.png";
 
         }
 
         TextView hiuser = (TextView) findViewById(R.id.hi_user);
-        hiuser.setText(" Here are your albums "+user);
+        hiuser.setText(" Here are your albums ! ");
         hiuser.setTypeface(EasyFonts.walkwayBold(this));
 
         GridView grid = (GridView) findViewById(R.id.grid);
         CustomAdapter adapter = new CustomAdapter(this,names,images);
-        grid.setAdapter(adapter);
-
-
-
-        }
-
-
+        grid.setAdapter(adapter);}
 
     }
 
