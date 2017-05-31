@@ -99,13 +99,14 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        //if the user is logged out, the GoToAlbums button is hidden
+        //if the user is logged out, the GoToAlbums button is hidden and the Albums are deleted
         AccessTokenTracker accessTokenTracker = new AccessTokenTracker() {
             @Override
             protected void onCurrentAccessTokenChanged(
                     AccessToken oldAccessToken,
                     AccessToken currentAccessToken) {
                 if (currentAccessToken == null){
+                    Albums = new ArrayList<Album>();
                     gotoalbums.setVisibility(View.INVISIBLE);
                 }
             }
