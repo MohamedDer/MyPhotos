@@ -62,7 +62,7 @@ public class CustomAdapter2 extends BaseAdapter {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         // TODO Auto-generated method stub
-        Holder holder=new Holder();
+        final Holder holder=new Holder();
         View rowView;
 
         rowView = inflater.inflate(R.layout.image_item, null);
@@ -77,9 +77,11 @@ public class CustomAdapter2 extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                //Toast.makeText(context, "Image selected ! ", Toast.LENGTH_SHORT).show();
-
-
+                Toast.makeText(context, "Image selected ! ", Toast.LENGTH_SHORT).show();
+                if (holder.chk_img.isChecked())
+                    holder.chk_img.setChecked(false);
+                else
+                    holder.chk_img.setChecked(true);
             }
         });
 
