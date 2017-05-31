@@ -70,14 +70,14 @@ public class CustomAdapter extends BaseAdapter {
             holder.alb_img =(ImageView) rowView.findViewById(R.id.albimage);
 
             holder.alb_name.setText(names[position]);
-            Picasso.with(context).load("http://i.imgur.com/DvpvklR.png").into(holder.alb_img);;
+            Picasso.with(context).load(imageurl[position]).into(holder.alb_img);;
 
             rowView.setOnClickListener(new OnClickListener() {
 
                 @Override
                 public void onClick(View v) {
                     // TODO Auto-generated method stub
-                    Toast.makeText(context, "You Clicked "+names[position], Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "You selected "+names[position], Toast.LENGTH_SHORT).show();
                     Intent viewimages =  new Intent(context, ImagesActivity.class);
                     viewimages.putExtra("album",names[position]);
                     context.startActivity(viewimages);
