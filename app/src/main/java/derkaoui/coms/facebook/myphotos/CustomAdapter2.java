@@ -70,18 +70,24 @@ public class CustomAdapter2 extends BaseAdapter {
         holder.alb_img =(ImageView) rowView.findViewById(R.id.imageshw);
 
         //photo added manually, instead I should do a loop to add all image urls
-        Picasso.with(context).load("http://i.imgur.com/DvpvklR.png").into(holder.alb_img);;
+        Picasso.with(context).load(imageurl[position]).into(holder.alb_img);;
 
         rowView.setOnClickListener(new OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                Toast.makeText(context, "Image selected ! ", Toast.LENGTH_SHORT).show();
-                if (holder.chk_img.isChecked())
+
+                if (holder.chk_img.isChecked()){
+                    Toast.makeText(context, "Image unselected ! ", Toast.LENGTH_SHORT).show();
                     holder.chk_img.setChecked(false);
-                else
+                }
+
+                else{
+                    Toast.makeText(context, "Image selected ! ", Toast.LENGTH_SHORT).show();
                     holder.chk_img.setChecked(true);
+                }
+
             }
         });
 

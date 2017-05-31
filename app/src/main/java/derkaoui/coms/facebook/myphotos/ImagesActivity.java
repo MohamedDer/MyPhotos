@@ -9,7 +9,9 @@ import android.widget.TextView;
 import com.vstechlab.easyfonts.EasyFonts;
 
 public class ImagesActivity extends AppCompatActivity {
-    String[] images = {"http://static.ccm2.net/www.commentcamarche.net/_skin/_local/img/logo.png?201402061805 ","http://static.ccm2.net/www.commentcamarche.net/_skin/_local/img/logo.png?201402061805 ","http://static.ccm2.net/www.commentcamarche.net/_skin/_local/img/logo.png?201402061805 ","http://static.ccm2.net/www.commentcamarche.net/_skin/_local/img/logo.png?201402061805 ","http://static.ccm2.net/www.commentcamarche.net/_skin/_local/img/logo.png?201402061805 ",  };
+
+    //I added manually a photo
+    String[] images = {"http://i.imgur.com/DvpvklR.png" };
 
 
     @Override
