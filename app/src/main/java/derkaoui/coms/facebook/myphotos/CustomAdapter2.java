@@ -25,13 +25,13 @@ public class CustomAdapter2 extends BaseAdapter {
 
 
     Context context;
-    ArrayList<String> imageurl;
+    String[] imagesurl;
     private static LayoutInflater inflater=null;
 
-    public CustomAdapter2(ImagesActivity mainActivity,ArrayList<String> imag) {
+    public CustomAdapter2(ImagesActivity mainActivity,String[] imag) {
         // TODO Auto-generated constructor stub
         context=mainActivity;
-        this.imageurl=imag;
+        this.imagesurl=imag;
         inflater = ( LayoutInflater )context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
     }
@@ -39,7 +39,7 @@ public class CustomAdapter2 extends BaseAdapter {
     @Override
     public int getCount() {
         // TODO Auto-generated method stub
-        return 1;
+        return imagesurl.length;
     }
 
     @Override
@@ -70,7 +70,7 @@ public class CustomAdapter2 extends BaseAdapter {
         holder.chk_img =(CheckBox) rowView.findViewById(R.id.chekcboxshw);
         holder.alb_img =(ImageView) rowView.findViewById(R.id.imageshw);
 
-        Picasso.with(context).load(imageurl.get(position)).resize(400,400).into(holder.alb_img);;
+        Picasso.with(context).load(imagesurl[position]).resize(400,400).into(holder.alb_img);
 
         rowView.setOnClickListener(new OnClickListener() {
 
@@ -87,7 +87,6 @@ public class CustomAdapter2 extends BaseAdapter {
                     Toast.makeText(context, "Image selected ! ", Toast.LENGTH_SHORT).show();
                     holder.chk_img.setChecked(true);
                 }
-
             }
         });
 

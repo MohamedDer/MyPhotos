@@ -24,11 +24,12 @@ import static android.R.attr.start;
 
 public class CustomAdapter extends BaseAdapter {
 
+    String[] urls;
     String [] names;
     Context context;
     String [] imageurl;
     ArrayList<Album> albums;
-        private static LayoutInflater inflater=null;
+    private static LayoutInflater inflater=null;
         public CustomAdapter(AlbumsActivity mainActivity, String[] names, String[] imageurl,ArrayList<Album> aa) {
             // TODO Auto-generated constructor stub
             this.names=names;
@@ -81,9 +82,17 @@ public class CustomAdapter extends BaseAdapter {
                 public void onClick(View v) {
                     // TODO Auto-generated method stub
                     Toast.makeText(context, "You selected "+names[position], Toast.LENGTH_SHORT).show();
+
                     Intent viewimages =  new Intent(context, ImagesActivity.class);
-                    viewimages.putExtra("position",position);
-                    viewimages.putParcelableArrayListExtra("albums",albums);
+
+                    urls = new String[albums.get(position).photosurl.size()];
+
+                    for(int i=0;i<albums.get(position).photosurl.size();i++){
+                        urls[i]= albums.get(position).photosurl.get(i);
+                    }
+                    viewimages.putExtra("name",albums.get(position).name);
+                    viewimages.putExtra("urls",urls);
+
                     context.startActivity(viewimages);
 
                 }

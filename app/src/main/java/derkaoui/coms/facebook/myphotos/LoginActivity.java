@@ -87,6 +87,7 @@ public class LoginActivity extends AppCompatActivity {
                                             }
                                         }
                                         else {
+                                            //setting a default icon if the album is empty
                                             Albums.get(i).photosurl.add("https://static.xx.fbcdn.net/rsrc.php/v3/yO/r/7q6AXSKeuBG.png");
                                         }
                                     }
@@ -95,8 +96,7 @@ public class LoginActivity extends AppCompatActivity {
                                     e.printStackTrace();
                                 }
                                 finally {
-
-                                    Log.v("Number fo albums  "+ Albums.size(),"Photos of 1 are "+ Albums.get(0).photosurl.size());
+                                    //go to Albums activity
                                     final Intent gotoAlbumActivity = new Intent(LoginActivity.this,AlbumsActivity.class);
                                     gotoAlbumActivity.putParcelableArrayListExtra("albums",Albums);
                                     gotoalbums.setVisibility(View.VISIBLE);
@@ -119,7 +119,7 @@ public class LoginActivity extends AppCompatActivity {
             }
             @Override
             public void onCancel() {
-                Log.d("user","cancelled");
+                Log.d("user loggin ","cancelled");
             }
 
             @Override
@@ -150,63 +150,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-    //get current user's albums
-    public void getAlbums(){
-        new GraphRequest(AccessToken.getCurrentAccessToken(), "me/albums", null, HttpMethod.GET, new GraphRequest.Callback() {
-            public void onCompleted(GraphResponse response) {
-                try {
-                    if (response.getError() == null) {
-                        JSONObject respJSONObj = response.getJSONObject(); //convert GraphResponse response to JSONObject
-                        if (respJSONObj.has("data")) {
-                            JSONArray respJSONData = respJSONObj.optJSONArray("data"); //find JSONArray from JSONObject
-                            for (int i = 0; i < respJSONData.length(); i++) {//find no. of album using jaData.length()
-                                JSONObject AlbumJSON = respJSONData.getJSONObject(i); //convert perticular album into JSONObject
-                                LoginActivity.Albums.add(new Album(AlbumJSON.getString("name"),AlbumJSON.getString("id")));
-                                Log.d("Added album  name  ", LoginActivity.Albums.get(i).name);
-
-                                /* Get photos of the i th album
-                                StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-                                StrictMode.setThreadPolicy(policy);
-                                getPhotos(i);  */
-                            }
-                        }
-                    } else {
-                        Log.d("ERROR response  ", response.getError().toString());
-                    }
-                } catch (JSONException e) {
-                    Log.d("JSON ERROR", "");
-                    e.printStackTrace();
-                }
-            }
-        }
-        ).executeAndWait();
-    }
-
-    //get current album's photos
-    public void getPhotos(final int j){
-
-        Bundle parameters = new Bundle();
-        parameters.putString("fields", "images");
-        new GraphRequest(AccessToken.getCurrentAccessToken(),"/"+Albums.get(j).id +"/photos", parameters, HttpMethod.GET, new GraphRequest.Callback() {
-            public void onCompleted(GraphResponse response) {
-                try {
-                    if (response.getError() == null) {
-                        JSONObject respJSONObj = response.getJSONObject(); //convert GraphResponse response to JSONObject
-                        JSONArray respJSONData = respJSONObj.optJSONArray("data"); //find JSONArray from JSONObject
-                        for (int i = 0; i < respJSONData.length(); i++) {
-                            String url = respJSONData.getJSONObject(i).getJSONArray("images").getJSONObject(0).getString("source");
-                            LoginActivity.Albums.get(j).photosurl.add(url);
-                            Log.d("Added Photo"+LoginActivity.Albums.get(j).photosurl ,"   ");
-                        }
-                    }
-
-                } catch (JSONException e) {
-                    Log.d("JSON ERROR", "");
-                    e.printStackTrace();
-                }
-
-            }  }).executeAndWait();
-    }
 
 
 

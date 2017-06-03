@@ -13,26 +13,31 @@ import java.util.ArrayList;
 
 public class ImagesActivity extends AppCompatActivity {
 
-    ArrayList<Album> albums;
-
+    String[] urls;
+    String name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_images);
-        albums = getIntent().getParcelableArrayListExtra("albums");
-        int pos = getIntent().getIntExtra("position",0);
-        String albumname = albums.get(pos).name;
-        Log.d("hoooo "+ albums.get(pos).photosurl.size()  ,"");
+
+        urls = getIntent().getStringArrayExtra("urls");
+        name = getIntent().getStringExtra("name");
 
 
         TextView tvi = (TextView) findViewById(R.id.tvi);
-        tvi.setText(albumname +"  : ");
+        tvi.setText(name +"  : ");
         tvi.setTypeface(EasyFonts.walkwayBold(this));
 
-        GridView gr = (GridView) findViewById(R.id.grid2) ;
-        CustomAdapter2 adapter = new CustomAdapter2(this, albums.get(pos).photosurl);
-        gr.setAdapter(adapter);
+        if (urls[0].equals("https://static.xx.fbcdn.net/rsrc.php/v3/yO/r/7q6AXSKeuBG.png")){
+
+        }
+        else{
+            GridView gr = (GridView) findViewById(R.id.grid2) ;
+            CustomAdapter2 adapter = new CustomAdapter2(this, urls);
+            gr.setAdapter(adapter);
+        }
+
 
     }
 }
