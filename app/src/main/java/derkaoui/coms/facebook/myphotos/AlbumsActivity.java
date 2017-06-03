@@ -24,7 +24,7 @@ public class AlbumsActivity extends AppCompatActivity {
 
     ArrayList<Album> MyAlbum;
     String[] names ;
-    String[] images ;
+    String[] image ;
 
 
     @Override
@@ -33,25 +33,27 @@ public class AlbumsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_albums);
 
         //get Albums
-        MyAlbum = getIntent().getParcelableArrayListExtra("Albums");
+        MyAlbum = getIntent().getParcelableArrayListExtra("albums");
 
         names = new String[MyAlbum.size()];
-        images = new String[MyAlbum.size()];
+        image = new String[MyAlbum.size()];
 
         for (int i=0;i<MyAlbum.size();i++){
             names[i]=MyAlbum.get(i).name;
-            // I added a photo manually, due to the problem in getImages()
-            images[i]="http://i.imgur.com/DvpvklR.png";
-
+            image[i]=MyAlbum.get(i).photosurl.get(0);
+            Log.d("added url ", ""+image[i]);
         }
+
 
         TextView hiuser = (TextView) findViewById(R.id.hi_user);
         hiuser.setText(" Here are your albums ! ");
         hiuser.setTypeface(EasyFonts.walkwayBold(this));
 
         GridView grid = (GridView) findViewById(R.id.grid);
-        CustomAdapter adapter = new CustomAdapter(this,names,images);
-        grid.setAdapter(adapter);}
+        CustomAdapter adapter = new CustomAdapter(this,names,image,MyAlbum);
+        grid.setAdapter(adapter);
+
+    }
 
     }
 

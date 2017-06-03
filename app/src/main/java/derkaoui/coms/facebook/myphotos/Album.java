@@ -17,7 +17,6 @@ public class Album implements Parcelable {
 
     public Album(String name,String id){
         this.name = name;
-
         this.id = id;
         this.photosurl = new ArrayList<String>();
     }
@@ -25,6 +24,7 @@ public class Album implements Parcelable {
     protected Album(Parcel in) {
         name = in.readString();
         id = in.readString();
+        photosurl = in.createStringArrayList();
     }
 
     public static final Creator<Album> CREATOR = new Creator<Album>() {
@@ -48,5 +48,6 @@ public class Album implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(name);
         dest.writeString(id);
+        dest.writeStringList(photosurl);
     }
 }

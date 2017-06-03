@@ -14,6 +14,8 @@ import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+
 import static android.R.attr.start;
 
 /**
@@ -22,17 +24,18 @@ import static android.R.attr.start;
 
 public class CustomAdapter extends BaseAdapter {
 
-        String [] names;
-        Context context;
-        String [] imageurl;
+    String [] names;
+    Context context;
+    String [] imageurl;
+    ArrayList<Album> albums;
         private static LayoutInflater inflater=null;
-        public CustomAdapter(AlbumsActivity mainActivity, String[] names, String[] imageurl) {
+        public CustomAdapter(AlbumsActivity mainActivity, String[] names, String[] imageurl,ArrayList<Album> aa) {
             // TODO Auto-generated constructor stub
             this.names=names;
             context=mainActivity;
             this.imageurl=imageurl;
-            inflater = ( LayoutInflater )context.
-                    getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            this.albums = aa;
+            inflater = ( LayoutInflater )context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         }
 
@@ -70,7 +73,7 @@ public class CustomAdapter extends BaseAdapter {
             holder.alb_img =(ImageView) rowView.findViewById(R.id.albimage);
 
             holder.alb_name.setText(names[position]);
-            Picasso.with(context).load(imageurl[position]).into(holder.alb_img);;
+            Picasso.with(context).load(imageurl[position]).resize(400,420).into(holder.alb_img);
 
             rowView.setOnClickListener(new OnClickListener() {
 
@@ -79,10 +82,9 @@ public class CustomAdapter extends BaseAdapter {
                     // TODO Auto-generated method stub
                     Toast.makeText(context, "You selected "+names[position], Toast.LENGTH_SHORT).show();
                     Intent viewimages =  new Intent(context, ImagesActivity.class);
-                    viewimages.putExtra("album",names[position]);
+                    viewimages.putExtra("position",position);
+                    viewimages.putParcelableArrayListExtra("albums",albums);
                     context.startActivity(viewimages);
-
-
 
                 }
             });

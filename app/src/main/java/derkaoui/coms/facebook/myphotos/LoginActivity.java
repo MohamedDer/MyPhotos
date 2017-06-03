@@ -60,7 +60,6 @@ public class LoginActivity extends AppCompatActivity {
         gotoalbums.setVisibility(View.INVISIBLE);
 
         LoginButton loginButton = (LoginButton) findViewById(R.id.login_button);
-        //loginButton.setReadPermissions("user_photos");
         LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile","user_photos"));
 
         // Callback registration, includes album's processing
@@ -69,25 +68,55 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onSuccess(LoginResult loginResult) {
 
-                //get user albums
-                StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-                StrictMode.setThreadPolicy(policy);
-                getAlbums();
+                GraphRequest request = GraphRequest.newMeRequest(
+                        AccessToken.getCurrentAccessToken(),
+                        new GraphRequest.GraphJSONObjectCallback() {
+                            @Override
+                            public void onCompleted(JSONObject object, GraphResponse response) {
+                                Albums = new ArrayList<Album>();
+                                try {
+                                    JSONArray albums = object.getJSONObject("albums").getJSONArray("data");
+                                    for (int i=0; i< albums.length();i++){
+                                        //getting album names and id
+                                        LoginActivity.Albums.add( new Album(albums.getJSONObject(i).getString("name"),albums.getJSONObject(i).getString("id")));
+                                        if ( albums.getJSONObject(i).has("photos")){
+                                            JSONArray photos = albums.getJSONObject(i).getJSONObject("photos").getJSONArray("data");
+                                            for (int j=0;j<photos.length();j++){
+                                                //getting album photos
+                                                Albums.get(i).photosurl.add(j,photos.getJSONObject(j).getJSONArray("images").getJSONObject(0).getString("source"));
+                                            }
+                                        }
+                                        else {
+                                            Albums.get(i).photosurl.add("https://static.xx.fbcdn.net/rsrc.php/v3/yO/r/7q6AXSKeuBG.png");
+                                        }
+                                    }
 
-                //Send albums to Album Activity
-                final Intent gotoAlbumAct = new Intent(LoginActivity.this,AlbumsActivity.class);
-                gotoAlbumAct.putParcelableArrayListExtra("Albums",LoginActivity.Albums);
-                gotoalbums.setVisibility(View.VISIBLE);
-                gotoalbums.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        startActivity(gotoAlbumAct);
-                    }
-                });
-                startActivity(gotoAlbumAct);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                                finally {
+
+                                    Log.v("Number fo albums  "+ Albums.size(),"Photos of 1 are "+ Albums.get(0).photosurl.size());
+                                    final Intent gotoAlbumActivity = new Intent(LoginActivity.this,AlbumsActivity.class);
+                                    gotoAlbumActivity.putParcelableArrayListExtra("albums",Albums);
+                                    gotoalbums.setVisibility(View.VISIBLE);
+                                    gotoalbums.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            startActivity(gotoAlbumActivity);
+                                        }
+                                    });
+                                    startActivity(gotoAlbumActivity);
+                                }
+                            }
+                        });
+                Bundle parameters = new Bundle();
+                parameters.putString("fields", "albums{name,photos{link,images}}");
+                request.setParameters(parameters);
+                request.executeAsync();
+
 
             }
-
             @Override
             public void onCancel() {
                 Log.d("user","cancelled");

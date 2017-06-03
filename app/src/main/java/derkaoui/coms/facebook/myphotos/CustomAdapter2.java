@@ -15,6 +15,8 @@ import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+
 /**
  * Created by Mohamed Derkaoui on 25/05/2017.
  */
@@ -23,15 +25,14 @@ public class CustomAdapter2 extends BaseAdapter {
 
 
     Context context;
-    String [] imageurl;
+    ArrayList<String> imageurl;
     private static LayoutInflater inflater=null;
 
-    public CustomAdapter2(ImagesActivity mainActivity, String[] imageurl) {
+    public CustomAdapter2(ImagesActivity mainActivity,ArrayList<String> imag) {
         // TODO Auto-generated constructor stub
         context=mainActivity;
-        this.imageurl=imageurl;
-        inflater = ( LayoutInflater )context.
-                getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        this.imageurl=imag;
+        inflater = ( LayoutInflater )context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
     }
 
@@ -69,8 +70,7 @@ public class CustomAdapter2 extends BaseAdapter {
         holder.chk_img =(CheckBox) rowView.findViewById(R.id.chekcboxshw);
         holder.alb_img =(ImageView) rowView.findViewById(R.id.imageshw);
 
-        //photo added manually, instead I should do a loop to add all image urls
-        Picasso.with(context).load(imageurl[position]).into(holder.alb_img);;
+        Picasso.with(context).load(imageurl.get(position)).resize(400,400).into(holder.alb_img);;
 
         rowView.setOnClickListener(new OnClickListener() {
 
