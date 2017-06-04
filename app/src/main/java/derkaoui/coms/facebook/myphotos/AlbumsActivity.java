@@ -41,7 +41,6 @@ public class AlbumsActivity extends AppCompatActivity {
         for (int i=0;i<MyAlbum.size();i++){
             names[i]=MyAlbum.get(i).name;
             image[i]=MyAlbum.get(i).photosurl.get(0);
-            Log.d("added url ", ""+image[i]);
         }
 
 

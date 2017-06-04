@@ -6,6 +6,7 @@ import android.util.Log;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.vstechlab.easyfonts.EasyFonts;
 
@@ -30,6 +31,7 @@ public class ImagesActivity extends AppCompatActivity {
         tvi.setTypeface(EasyFonts.walkwayBold(this));
 
         if (urls[0].equals("https://static.xx.fbcdn.net/rsrc.php/v3/yO/r/7q6AXSKeuBG.png")){
+            Toast.makeText(this, " Empty album :/ Go get a life and take some pics !! ", Toast.LENGTH_SHORT).show();
 
         }
         else{

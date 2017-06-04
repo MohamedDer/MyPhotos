@@ -86,7 +86,7 @@ public class CustomAdapter extends BaseAdapter {
                     Intent viewimages =  new Intent(context, ImagesActivity.class);
 
                     urls = new String[albums.get(position).photosurl.size()];
-
+                    //urls contains the url links of all the photos of the selected album
                     for(int i=0;i<albums.get(position).photosurl.size();i++){
                         urls[i]= albums.get(position).photosurl.get(i);
                     }

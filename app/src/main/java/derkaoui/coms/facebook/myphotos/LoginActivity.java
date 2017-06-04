@@ -114,8 +114,6 @@ public class LoginActivity extends AppCompatActivity {
                 parameters.putString("fields", "albums{name,photos{link,images}}");
                 request.setParameters(parameters);
                 request.executeAsync();
-
-
             }
             @Override
             public void onCancel() {
@@ -148,12 +146,6 @@ public class LoginActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         callbackManager.onActivityResult(requestCode, resultCode, data);
     }
-
-
-
-
-
-
 
 }
 
