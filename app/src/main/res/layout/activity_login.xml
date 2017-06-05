@@ -36,10 +36,10 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="58dp"
-        android:text="Internship  Assignement "
+        android:text="My Photos "
         android:textAlignment="center"
         android:textColor="@color/com_facebook_share_button_text_color"
-        android:textSize="24sp" />
+        android:textSize="36sp" />
 
     <Button
         android:id="@+id/btt"
@@ -49,6 +49,17 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="38dp"
         android:text="Go to Albums" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="32dp"
+        android:text="Internship Assignement "
+        android:textColor="@android:color/white"
+        android:textSize="12sp" />
 
 
 </RelativeLayout>
