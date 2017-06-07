@@ -60,7 +60,7 @@ public class LoginActivity extends AppCompatActivity {
         gotoalbums.setVisibility(View.INVISIBLE);
 
         LoginButton loginButton = (LoginButton) findViewById(R.id.login_button);
-        LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile","user_photos"));
+        LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("user_photos"));
 
         // Callback registration, includes album's processing
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
