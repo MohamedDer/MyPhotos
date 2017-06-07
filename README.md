@@ -1,7 +1,6 @@
-# MyPhotos : Hidden Founders intership assignement.
+# MyPhotos : Mini Facebook photos exporting Android app
 
-Assignement : https://goo.gl/KmCGAt
+Hidden Founders internship assignement - https://goo.gl/KmCGAt -.
+Don't hesitate to contact me for any detail! 
 
-Don't hesitate to contact me for any other detail! 
-
-YO!
+## YO!
