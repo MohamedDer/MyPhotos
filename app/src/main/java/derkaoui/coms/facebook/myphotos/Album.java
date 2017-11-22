@@ -3,7 +3,6 @@ package derkaoui.coms.facebook.myphotos;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -11,22 +10,6 @@ import java.util.ArrayList;
  */
 
 public class Album implements Parcelable {
-    String name;
-    String id;
-    ArrayList<String> photosurl;
-
-    public Album(String name,String id){
-        this.name = name;
-        this.id = id;
-        this.photosurl = new ArrayList<String>();
-    }
-
-    protected Album(Parcel in) {
-        name = in.readString();
-        id = in.readString();
-        photosurl = in.createStringArrayList();
-    }
-
     public static final Creator<Album> CREATOR = new Creator<Album>() {
         @Override
         public Album createFromParcel(Parcel in) {
@@ -38,6 +21,21 @@ public class Album implements Parcelable {
             return new Album[size];
         }
     };
+    String name_Alb;
+    String id_Alb;
+    ArrayList<String> photosUrl;
+
+    public Album(String name, String id) {
+        this.name_Alb = name;
+        this.id_Alb = id;
+        this.photosUrl = new ArrayList<String>();
+    }
+
+    protected Album(Parcel in) {
+        name_Alb = in.readString();
+        id_Alb = in.readString();
+        photosUrl = in.createStringArrayList();
+    }
 
     @Override
     public int describeContents() {
@@ -46,8 +44,8 @@ public class Album implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(name);
-        dest.writeString(id);
-        dest.writeStringList(photosurl);
+        dest.writeString(name_Alb);
+        dest.writeString(id_Alb);
+        dest.writeStringList(photosUrl);
     }
 }

@@ -2,7 +2,6 @@ package derkaoui.coms.facebook.myphotos;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -16,26 +15,31 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-import static android.R.attr.start;
-
 /**
  * Created by Mohamed Derkaoui on 25/05/2017.
  */
 
-public class CustomAdapter extends BaseAdapter {
+public class AlbumsAdapter extends BaseAdapter {
 
-    String[] urls;
+    private static LayoutInflater inflater = null;
     String [] names;
     Context context;
-    String [] imageurl;
-    ArrayList<Album> albums;
-    private static LayoutInflater inflater=null;
-        public CustomAdapter(AlbumsActivity mainActivity, String[] names, String[] imageurl,ArrayList<Album> aa) {
-            // TODO Auto-generated constructor stub
-            this.names=names;
+    String[] defaultImageUrl;
+    ArrayList<Album> Albums;
+
+
+    public AlbumsAdapter(AlbumsActivity mainActivity, ArrayList<Album> myAlbums) {
+
             context=mainActivity;
-            this.imageurl=imageurl;
-            this.albums = aa;
+        this.Albums = myAlbums;
+
+        this.names = new String[myAlbums.size()];
+        this.defaultImageUrl = new String[myAlbums.size()];
+
+        for (int i = 0; i < myAlbums.size(); i++) {
+            names[i] = myAlbums.get(i).name_Alb;
+            defaultImageUrl[i] = myAlbums.get(i).photosUrl.get(0);
+        }
             inflater = ( LayoutInflater )context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         }
@@ -58,11 +62,6 @@ public class CustomAdapter extends BaseAdapter {
             return position;
         }
 
-        public class Holder
-        {
-            TextView alb_name;
-            ImageView alb_img;
-        }
         @Override
         public View getView(final int position, View convertView, ViewGroup parent) {
             // TODO Auto-generated method stub
@@ -74,7 +73,7 @@ public class CustomAdapter extends BaseAdapter {
             holder.alb_img =(ImageView) rowView.findViewById(R.id.albimage);
 
             holder.alb_name.setText(names[position]);
-            Picasso.with(context).load(imageurl[position]).resize(400,420).into(holder.alb_img);
+            Picasso.with(context).load(defaultImageUrl[position]).resize(410, 450).into(holder.alb_img);
 
             rowView.setOnClickListener(new OnClickListener() {
 
@@ -82,16 +81,9 @@ public class CustomAdapter extends BaseAdapter {
                 public void onClick(View v) {
                     // TODO Auto-generated method stub
                     Toast.makeText(context, "You selected "+names[position], Toast.LENGTH_SHORT).show();
-
                     Intent viewimages =  new Intent(context, ImagesActivity.class);
-
-                    urls = new String[albums.get(position).photosurl.size()];
-                    //urls contains the url links of all the photos of the selected album
-                    for(int i=0;i<albums.get(position).photosurl.size();i++){
-                        urls[i]= albums.get(position).photosurl.get(i);
-                    }
-                    viewimages.putExtra("name",albums.get(position).name);
-                    viewimages.putExtra("urls",urls);
+                    viewimages.putExtra("album_name", Albums.get(position).name_Alb);
+                    viewimages.putExtra("photos_urls", Albums.get(position).photosUrl);
 
                     context.startActivity(viewimages);
 
@@ -100,4 +92,9 @@ public class CustomAdapter extends BaseAdapter {
 
             return rowView;
         }
+
+    public class Holder {
+        TextView alb_name;
+        ImageView alb_img;
+    }
 }

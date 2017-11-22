@@ -12,24 +12,24 @@
         android:id="@+id/login_button"
         android:layout_width="287dp"
         android:layout_height="70dp"
+        android:layout_below="@+id/appnameTextView"
+        android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="107dp"
+        android:layout_marginTop="79dp"
+        android:textSize="18sp"
         tools:layout_editor_absoluteX="49dp"
-        tools:layout_editor_absoluteY="220dp"
-        android:layout_below="@+id/tv2"
-        android:layout_centerHorizontal="true" />
+        tools:layout_editor_absoluteY="220dp" />
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginBottom="64dp"
-        app:srcCompat="@mipmap/hf_logo"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_above="@+id/textView"
+        android:layout_centerHorizontal="true"
+        app:srcCompat="@mipmap/hf_logo" />
 
     <TextView
-        android:id="@+id/tv2"
+        android:id="@+id/appnameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -38,26 +38,30 @@
         android:layout_marginTop="58dp"
         android:text="My Photos "
         android:textAlignment="center"
-        android:textColor="@color/com_facebook_share_button_text_color"
-        android:textSize="36sp" />
+        android:textColor="@color/com_facebook_button_background_color_focused"
+        android:textSize="90px" />
 
     <Button
-        android:id="@+id/btt"
+        android:id="@+id/gotoalbumsButton"
+        style="@style/com_facebook_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/login_button"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="38dp"
-        android:text="Go to Albums" />
+        android:layout_marginTop="32dp"
+        android:text="Go to my albums"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/gotoalbumsButton"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="15dp"
         android:text="Internship Assignement "
+        android:textAlignment="center"
         android:textColor="@android:color/white"
         android:textSize="12sp" />
 

@@ -1,9 +1,7 @@
 package derkaoui.coms.facebook.myphotos;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.AdapterView;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -14,30 +12,32 @@ import java.util.ArrayList;
 
 public class ImagesActivity extends AppCompatActivity {
 
-    String[] urls;
-    String name;
+    ArrayList<String> photos_urls;
+    String default_alb_cover = "https://static.xx.fbcdn.net/rsrc.php/v3/yO/r/7q6AXSKeuBG.png";
+    String album_name;
+    String emtpy_alb_toast = "                Empty Album :/ \n Go get a life and take some pics !! ";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_images);
 
-        urls = getIntent().getStringArrayExtra("urls");
-        name = getIntent().getStringExtra("name");
+        photos_urls = getIntent().getStringArrayListExtra("photos_urls");
+        album_name = getIntent().getStringExtra("album_name");
 
 
-        TextView tvi = (TextView) findViewById(R.id.tvi);
-        tvi.setText(name +"  : ");
-        tvi.setTypeface(EasyFonts.walkwayBold(this));
+        TextView album_nameTextView = (TextView) findViewById(R.id.alb_name);
+        album_nameTextView.setText(album_name + "  : ");
+        album_nameTextView.setTypeface(EasyFonts.walkwayBold(this));
 
-        if (urls[0].equals("https://static.xx.fbcdn.net/rsrc.php/v3/yO/r/7q6AXSKeuBG.png")){
-            Toast.makeText(this, " Empty album :/ Go get a life and take some pics !! ", Toast.LENGTH_SHORT).show();
+        if (photos_urls.get(0).equals(default_alb_cover)) {
+            Toast.makeText(this, emtpy_alb_toast, Toast.LENGTH_SHORT).show();
 
         }
         else{
             GridView gr = (GridView) findViewById(R.id.grid2) ;
-            CustomAdapter2 adapter = new CustomAdapter2(this, urls);
-            gr.setAdapter(adapter);
+            ImagesAdapter im_adapter = new ImagesAdapter(this, photos_urls);
+            gr.setAdapter(im_adapter);
         }
 
 

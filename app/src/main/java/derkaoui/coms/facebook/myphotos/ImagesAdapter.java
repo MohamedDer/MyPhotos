@@ -1,8 +1,6 @@
 package derkaoui.coms.facebook.myphotos;
 
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -10,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
@@ -21,17 +18,17 @@ import java.util.ArrayList;
  * Created by Mohamed Derkaoui on 25/05/2017.
  */
 
-public class CustomAdapter2 extends BaseAdapter {
+public class ImagesAdapter extends BaseAdapter {
 
 
-    Context context;
-    String[] imagesurl;
     private static LayoutInflater inflater=null;
+    Context context;
+    ArrayList<String> imagesUrls;
 
-    public CustomAdapter2(ImagesActivity mainActivity,String[] imag) {
+    public ImagesAdapter(ImagesActivity mainActivity, ArrayList<String> imagesurls) {
         // TODO Auto-generated constructor stub
         context=mainActivity;
-        this.imagesurl=imag;
+        this.imagesUrls = imagesurls;
         inflater = ( LayoutInflater )context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
     }
@@ -39,7 +36,7 @@ public class CustomAdapter2 extends BaseAdapter {
     @Override
     public int getCount() {
         // TODO Auto-generated method stub
-        return imagesurl.length;
+        return imagesUrls.size();
     }
 
     @Override
@@ -54,12 +51,6 @@ public class CustomAdapter2 extends BaseAdapter {
         return position;
     }
 
-    public class Holder
-    {
-
-        ImageView alb_img;
-        CheckBox chk_img;
-    }
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         // TODO Auto-generated method stub
@@ -70,7 +61,7 @@ public class CustomAdapter2 extends BaseAdapter {
         holder.chk_img =(CheckBox) rowView.findViewById(R.id.chekcboxshw);
         holder.alb_img =(ImageView) rowView.findViewById(R.id.imageshw);
 
-        Picasso.with(context).load(imagesurl[position]).resize(400,400).into(holder.alb_img);
+        Picasso.with(context).load(imagesUrls.get(position)).resize(410, 450).into(holder.alb_img);
 
         rowView.setOnClickListener(new OnClickListener() {
 
@@ -91,5 +82,11 @@ public class CustomAdapter2 extends BaseAdapter {
         });
 
         return rowView;
+    }
+
+    public class Holder {
+
+        ImageView alb_img;
+        CheckBox chk_img;
     }
 }
