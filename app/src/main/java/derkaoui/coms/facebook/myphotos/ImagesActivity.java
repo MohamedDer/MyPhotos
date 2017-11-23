@@ -13,25 +13,27 @@ import java.util.ArrayList;
 public class ImagesActivity extends AppCompatActivity {
 
     ArrayList<String> photos_urls;
-    String default_alb_cover = "https://static.xx.fbcdn.net/rsrc.php/v3/yO/r/7q6AXSKeuBG.png";
+    String DEFAULT_ALBUM_COVER = "https://static.xx.fbcdn.net/rsrc.php/v3/yO/r/7q6AXSKeuBG.png";
+    String EMPTY_ALBUM_TOAST = "                Empty Album :/ \n Go get a life and take some pics !! ";
+    String PHOTOS_URLS = "photos_urls";
+    String ALBUM_NAME = "album_name";
     String album_name;
-    String emtpy_alb_toast = "                Empty Album :/ \n Go get a life and take some pics !! ";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_images);
 
-        photos_urls = getIntent().getStringArrayListExtra("photos_urls");
-        album_name = getIntent().getStringExtra("album_name");
+        photos_urls = getIntent().getStringArrayListExtra(PHOTOS_URLS);
+        album_name = getIntent().getStringExtra(ALBUM_NAME);
 
 
         TextView album_nameTextView = (TextView) findViewById(R.id.alb_name);
         album_nameTextView.setText(album_name + "  : ");
         album_nameTextView.setTypeface(EasyFonts.walkwayBold(this));
 
-        if (photos_urls.get(0).equals(default_alb_cover)) {
-            Toast.makeText(this, emtpy_alb_toast, Toast.LENGTH_SHORT).show();
+        if (photos_urls.get(0).equals(DEFAULT_ALBUM_COVER)) {
+            Toast.makeText(this, EMPTY_ALBUM_TOAST, Toast.LENGTH_SHORT).show();
 
         }
         else{
