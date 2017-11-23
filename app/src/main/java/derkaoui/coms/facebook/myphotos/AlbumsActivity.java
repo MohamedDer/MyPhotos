@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class AlbumsActivity extends AppCompatActivity {
 
 
-    ArrayList<Album> myAlbums;
+    ArrayList<Album> userAlbums;
 
 
     @Override
@@ -20,16 +20,14 @@ public class AlbumsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_albums);
 
-        //get Albums
-        myAlbums = getIntent().getParcelableArrayListExtra("Albums");
+        //getting Albums
+        userAlbums = getIntent().getParcelableArrayListExtra("Albums");
 
-        TextView hiuser = (TextView) findViewById(R.id.hi_user);
-        hiuser.setText(R.string.albums_head);
+        TextView hiuser = (TextView) findViewById(R.id.albums_head);
         hiuser.setTypeface(EasyFonts.walkwayBold(this));
-
         GridView grid = (GridView) findViewById(R.id.grid);
-        AlbumsAdapter alb_adapter = new AlbumsAdapter(this, myAlbums);
-        grid.setAdapter(alb_adapter);
+        AlbumsAdapter albumAdapter = new AlbumsAdapter(this, userAlbums);
+        grid.setAdapter(albumAdapter);
 
     }
 
