@@ -5,9 +5,6 @@ import android.os.Parcelable;
 
 import java.util.ArrayList;
 
-/**
- * Created by Mohamed Derkaoui on 23/05/2017.
- */
 
 public class Album implements Parcelable {
     public static final Creator<Album> CREATOR = new Creator<Album>() {
@@ -21,20 +18,20 @@ public class Album implements Parcelable {
             return new Album[size];
         }
     };
-    String name_Alb;
-    String id_Alb;
-    ArrayList<String> photosUrl;
+    String albumName;
+    String albumId;
+    ArrayList<String> photosUrls;
 
     public Album(String name, String id) {
-        this.name_Alb = name;
-        this.id_Alb = id;
-        this.photosUrl = new ArrayList<String>();
+        this.albumName = name;
+        this.albumId = id;
+        this.photosUrls = new ArrayList<>();
     }
 
     protected Album(Parcel in) {
-        name_Alb = in.readString();
-        id_Alb = in.readString();
-        photosUrl = in.createStringArrayList();
+        albumName = in.readString();
+        albumId = in.readString();
+        photosUrls = in.createStringArrayList();
     }
 
     @Override
@@ -44,8 +41,8 @@ public class Album implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(name_Alb);
-        dest.writeString(id_Alb);
-        dest.writeStringList(photosUrl);
+        dest.writeString(albumName);
+        dest.writeString(albumId);
+        dest.writeStringList(photosUrls);
     }
 }
