@@ -31,9 +31,9 @@ import java.util.Arrays;
 
 public class LoginActivity extends AppCompatActivity {
 
-    static ArrayList<Album> Albums = new ArrayList<Album>();
+    static ArrayList<Album> Albums = new ArrayList<>();
     CallbackManager callbackManager = CallbackManager.Factory.create();
-    String default_alb_cover = "https://static.xx.fbcdn.net/rsrc.php/v3/yO/r/7q6AXSKeuBG.png";
+    String DEFAULT_ALBUM_COVER = "https://static.xx.fbcdn.net/rsrc.php/v3/yO/r/7q6AXSKeuBG.png";
 
 
     @Override
@@ -57,6 +57,18 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         LoginButton loginButton = (LoginButton) findViewById(R.id.login_button);
+
+        final AccessTokenTracker accessTokenTracker = new AccessTokenTracker() {
+            @Override
+            protected void onCurrentAccessTokenChanged(AccessToken oldAccessToken, AccessToken currentAccessToken) {
+                if (currentAccessToken == null) {
+                    Albums = new ArrayList<Album>();
+                    updateButtonVisibility(gotoalbumsButton);
+                }
+            }
+        };
+        accessTokenTracker.isTracking();
+
         // Logging button callback registration
         LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("user_photos"));
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
@@ -71,6 +83,8 @@ public class LoginActivity extends AppCompatActivity {
             public void onCancel() {
                 Log.d("user loggin ", "cancelled");
                 Toast.makeText(getApplicationContext(), "Loggin cancelled", Toast.LENGTH_SHORT).show();
+                if (!accessTokenTracker.equals(null))
+                    gotoalbumsButton.setVisibility(View.VISIBLE);
             }
 
             @Override
@@ -79,16 +93,9 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+
         //if the user is logged out, updating UI, clearing Album data
-        AccessTokenTracker accessTokenTracker = new AccessTokenTracker() {
-            @Override
-            protected void onCurrentAccessTokenChanged(AccessToken oldAccessToken, AccessToken currentAccessToken) {
-                if (currentAccessToken == null) {
-                    Albums = new ArrayList<Album>();
-                    updateButtonVisibility(gotoalbumsButton);
-                }
-            }
-        };
+
 
     }
 
@@ -131,11 +138,11 @@ public class LoginActivity extends AppCompatActivity {
                     JSONArray photos = albums.getJSONObject(i).getJSONObject("photos").getJSONArray("data");
                     for (int j = 0; j < photos.length(); j++) {
                         //getting Album photos
-                        Albums.get(i).photosUrl.add(j, photos.getJSONObject(j).getJSONArray("images").getJSONObject(0).getString("source"));
+                        Albums.get(i).photosUrls.add(j, photos.getJSONObject(j).getJSONArray("images").getJSONObject(0).getString("source"));
                     }
                 } else {
                     //setting a default icon if the Album is empty
-                    Albums.get(i).photosUrl.add(default_alb_cover);
+                    Albums.get(i).photosUrls.add(DEFAULT_ALBUM_COVER);
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
