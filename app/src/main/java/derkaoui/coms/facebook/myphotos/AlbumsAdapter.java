@@ -36,8 +36,8 @@ public class AlbumsAdapter extends BaseAdapter {
         this.defaultImageUrl = new String[myAlbums.size()];
 
         for (int i = 0; i < myAlbums.size(); i++) {
-            names[i] = myAlbums.get(i).albumName;
-            defaultImageUrl[i] = myAlbums.get(i).photosUrls.get(0);
+            names[i] = myAlbums.get(i).getAlbumName();
+            defaultImageUrl[i] = myAlbums.get(i).getPhotosUrls().get(0);
         }
             inflater = ( LayoutInflater )context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
@@ -67,18 +67,18 @@ public class AlbumsAdapter extends BaseAdapter {
             holder.alb_name =(TextView) rowView.findViewById(R.id.albname);
             holder.alb_img =(ImageView) rowView.findViewById(R.id.albimage);
 
+            //Setting album covers
             holder.alb_name.setText(names[position]);
             Picasso.with(context).load(defaultImageUrl[position]).resize(DEFAULT_IMAGE_WIDTH, DEFAULT_IMAGE_HEIGHT).into(holder.alb_img);
-
+            // Starting ImageActivity to show the photos of the selected album
             rowView.setOnClickListener(new OnClickListener() {
 
                 @Override
                 public void onClick(View v) {
                     Toast.makeText(context, "You selected "+names[position], Toast.LENGTH_SHORT).show();
                     Intent viewimages =  new Intent(context, ImagesActivity.class);
-                    viewimages.putExtra("album_name", Albums.get(position).albumName);
-                    viewimages.putExtra("photos_urls", Albums.get(position).photosUrls);
-
+                    viewimages.putExtra("album_name", Albums.get(position).getAlbumName());
+                    viewimages.putExtra("photos_urls", Albums.get(position).getPhotosUrls());
                     context.startActivity(viewimages);
 
                 }

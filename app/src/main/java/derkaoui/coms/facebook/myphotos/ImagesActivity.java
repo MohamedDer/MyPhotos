@@ -32,11 +32,14 @@ public class ImagesActivity extends AppCompatActivity {
         album_nameTextView.setText(album_name + "  : ");
         album_nameTextView.setTypeface(EasyFonts.walkwayBold(this));
 
+
         if (photos_urls.get(0).equals(DEFAULT_ALBUM_COVER)) {
+            //Empty album
             Toast.makeText(this, EMPTY_ALBUM_TOAST, Toast.LENGTH_SHORT).show();
 
         }
         else{
+            //Passing the photos' urls the the image adapter if the album isn't emplty
             GridView gr = (GridView) findViewById(R.id.grid2) ;
             ImagesAdapter im_adapter = new ImagesAdapter(this, photos_urls);
             gr.setAdapter(im_adapter);

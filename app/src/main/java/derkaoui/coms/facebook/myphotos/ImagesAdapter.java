@@ -17,7 +17,6 @@ import java.util.ArrayList;
 
 public class ImagesAdapter extends BaseAdapter {
 
-
     private final int DEFAULT_IMAGE_WIDTH = 410;
     private final int DEFAULT_IMAGE_HEIGHT = 450;
     LayoutInflater inflater = null;
@@ -25,7 +24,6 @@ public class ImagesAdapter extends BaseAdapter {
     private ArrayList<String> imagesUrls;
 
     public ImagesAdapter(ImagesActivity mainActivity, ArrayList<String> imagesurls) {
-        // TODO Auto-generated constructor stub
         context=mainActivity;
         this.imagesUrls = imagesurls;
         inflater = ( LayoutInflater )context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -34,13 +32,11 @@ public class ImagesAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        // TODO Auto-generated method stub
         return imagesUrls.size();
     }
 
     @Override
     public Object getItem(int position) {
-        // TODO Auto-generated method stub
         return position;
     }
 
