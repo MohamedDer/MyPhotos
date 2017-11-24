@@ -18,9 +18,10 @@ public class Album implements Parcelable {
             return new Album[size];
         }
     };
-    String albumName;
-    String albumId;
-    ArrayList<String> photosUrls;
+
+    private String albumName;
+    private String albumId;
+    private ArrayList<String> photosUrls;
 
     public Album(String name, String id) {
         this.albumName = name;
@@ -32,6 +33,18 @@ public class Album implements Parcelable {
         albumName = in.readString();
         albumId = in.readString();
         photosUrls = in.createStringArrayList();
+    }
+
+    public String getAlbumName() {
+        return albumName;
+    }
+
+    public ArrayList<String> getPhotosUrls() {
+        return photosUrls;
+    }
+
+    public String getAlbumId() {
+        return albumId;
     }
 
     @Override

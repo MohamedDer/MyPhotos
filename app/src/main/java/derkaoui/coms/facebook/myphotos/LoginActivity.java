@@ -55,9 +55,10 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(gotoAlbumActivity);
             }
         });
-
+        //Facebook login button
         LoginButton loginButton = (LoginButton) findViewById(R.id.login_button);
 
+        // If the user disconnected, updating UI
         final AccessTokenTracker accessTokenTracker = new AccessTokenTracker() {
             @Override
             protected void onCurrentAccessTokenChanged(AccessToken oldAccessToken, AccessToken currentAccessToken) {
@@ -73,9 +74,11 @@ public class LoginActivity extends AppCompatActivity {
         LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("user_photos"));
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             private ProfileTracker userTrack;
+
             @Override
             public void onSuccess(LoginResult loginResult) {
                 updateButtonVisibility(gotoalbumsButton);
+                //Getting user's albums
                 getAlbums();
             }
 
@@ -93,10 +96,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-
-        //if the user is logged out, updating UI, clearing Album data
-
-
     }
 
     void updateButtonVisibility(Button button) {
@@ -104,7 +103,6 @@ public class LoginActivity extends AppCompatActivity {
             button.setVisibility(View.INVISIBLE);
         else
             button.setVisibility(View.VISIBLE);
-
     }
 
     void getAlbums() {
@@ -129,6 +127,7 @@ public class LoginActivity extends AppCompatActivity {
         request.executeAsync();
     }
 
+    // Extract albums' data from JSON Arrays to Album ArrayList
     void getAlbumsArray(JSONArray albums, ArrayList<Album> Albums) {
         for (int i = 0; i < albums.length(); i++) {
             //getting Albums names and id
@@ -138,11 +137,11 @@ public class LoginActivity extends AppCompatActivity {
                     JSONArray photos = albums.getJSONObject(i).getJSONObject("photos").getJSONArray("data");
                     for (int j = 0; j < photos.length(); j++) {
                         //getting Album photos
-                        Albums.get(i).photosUrls.add(j, photos.getJSONObject(j).getJSONArray("images").getJSONObject(0).getString("source"));
+                        Albums.get(i).getPhotosUrls().add(j, photos.getJSONObject(j).getJSONArray("images").getJSONObject(0).getString("source"));
                     }
                 } else {
                     //setting a default icon if the Album is empty
-                    Albums.get(i).photosUrls.add(DEFAULT_ALBUM_COVER);
+                    Albums.get(i).getPhotosUrls().add(DEFAULT_ALBUM_COVER);
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -153,7 +152,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
     @Override
-    protected void  onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         callbackManager.onActivityResult(requestCode, resultCode, data);
     }
