@@ -22,7 +22,7 @@ public class AlbumsActivity extends AppCompatActivity {
         hiuser.setTypeface(EasyFonts.walkwayBold(this));
         GridView grid = (GridView) findViewById(R.id.grid);
 
-        //getting Albums and passing them to the AlbumAdapter
+        //getting Albums and passing them to the  AlbumAdapter
         userAlbums = getIntent().getParcelableArrayListExtra("Albums");
         AlbumsAdapter albumAdapter = new AlbumsAdapter(this, userAlbums);
         grid.setAdapter(albumAdapter);
