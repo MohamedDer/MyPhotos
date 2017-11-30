@@ -13,10 +13,6 @@ import java.util.ArrayList;
 public class ImagesActivity extends AppCompatActivity {
 
     ArrayList<String> photos_urls;
-    String DEFAULT_ALBUM_COVER = "https://static.xx.fbcdn.net/rsrc.php/v3/yO/r/7q6AXSKeuBG.png";
-    String EMPTY_ALBUM_TOAST = "                Empty Album :/ \n Go get a life and take some pics !! ";
-    String PHOTOS_URLS = "photos_urls";
-    String ALBUM_NAME = "album_name";
     String album_name;
 
     @Override
@@ -24,8 +20,8 @@ public class ImagesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_images);
 
-        photos_urls = getIntent().getStringArrayListExtra(PHOTOS_URLS);
-        album_name = getIntent().getStringExtra(ALBUM_NAME);
+        photos_urls = getIntent().getStringArrayListExtra(getApplicationContext().getResources().getString(R.string.photos_urls));
+        album_name = getIntent().getStringExtra(getApplicationContext().getResources().getString(R.string.album_name));
 
 
         TextView album_nameTextView = (TextView) findViewById(R.id.alb_name);
@@ -33,9 +29,9 @@ public class ImagesActivity extends AppCompatActivity {
         album_nameTextView.setTypeface(EasyFonts.walkwayBold(this));
 
 
-        if (photos_urls.get(0).equals(DEFAULT_ALBUM_COVER)) {
+        if (photos_urls.get(0).equals(getApplicationContext().getResources().getString(R.string.default_album_cover))) {
             //Empty album
-            Toast.makeText(this, EMPTY_ALBUM_TOAST, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getApplicationContext().getResources().getString(R.string.empty_album_toast), Toast.LENGTH_SHORT).show();
 
         } else {
             //Passing the photos' urls the the image adapter if the album isn't emplty

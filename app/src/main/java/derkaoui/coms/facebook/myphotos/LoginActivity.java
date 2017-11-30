@@ -33,8 +33,6 @@ public class LoginActivity extends AppCompatActivity {
 
     static ArrayList<Album> Albums = new ArrayList<>();
     CallbackManager callbackManager = CallbackManager.Factory.create();
-    String DEFAULT_ALBUM_COVER = "https://static.xx.fbcdn.net/rsrc.php/v3/yO/r/7q6AXSKeuBG.png";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -141,7 +139,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 } else {
                     //setting a default icon if the Album is empty
-                    Albums.get(i).getPhotosUrls().add(DEFAULT_ALBUM_COVER);
+                    Albums.get(i).getPhotosUrls().add(getApplicationContext().getResources().getString(R.string.default_album_cover));
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
