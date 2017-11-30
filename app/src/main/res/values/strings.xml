@@ -2,4 +2,10 @@
     <string name="app_name">My Photos</string>
     <string name="facebook_app_id">302207323537230</string>
     <string name="albums_head"> Here are your Albums ! </string>
+    <string name="default_album_cover">https://static.xx.fbcdn.net/rsrc.php/v3/yO/r/7q6AXSKeuBG.png</string>
+    <string name="empty_album_toast">                Empty Album :/ \n  Go get a life and take some pics !! </string>
+    <string name="photos_urls">photos_urls</string>
+    <string name="album_name">album_name</string>
+    <string name="byMohamedDer">by  MohamedDer</string>
+
 </resources>
