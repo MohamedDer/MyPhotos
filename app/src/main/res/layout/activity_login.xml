@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/hf"
+    android:background="@color/red"
     tools:context="derkaoui.coms.facebook.myphotos.LoginActivity">
 
 
@@ -12,21 +12,13 @@
         android:id="@+id/login_button"
         android:layout_width="287dp"
         android:layout_height="70dp"
-        android:layout_below="@+id/appnameTextView"
+        android:layout_above="@+id/imageView"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="79dp"
+        android:layout_marginBottom="134dp"
         android:textSize="18sp"
         tools:layout_editor_absoluteX="49dp"
         tools:layout_editor_absoluteY="220dp" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_above="@+id/textView"
-        android:layout_centerHorizontal="true"
-        app:srcCompat="@mipmap/hf_logo" />
 
     <TextView
         android:id="@+id/appnameTextView"
@@ -44,26 +36,35 @@
     <Button
         android:id="@+id/gotoalbumsButton"
         style="@style/com_facebook_button"
-        android:layout_width="wrap_content"
+        android:layout_width="287dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/login_button"
+        android:layout_below="@+id/appnameTextView"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="46dp"
+        android:layout_marginTop="69dp"
         android:text="     Go to my albums    "
         android:textSize="18sp"
         android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/textView"
+    <ImageView
+        android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/gotoalbumsButton"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="15dp"
-        android:text="Internship Assignement "
-        android:textAlignment="center"
-        android:textColor="@android:color/white"
-        android:textSize="12sp" />
+        android:layout_marginEnd="14dp"
+        android:layout_toStartOf="@+id/by_textView"
+        app:srcCompat="@mipmap/ic_launcher" />
+
+    <TextView
+        android:id="@+id/by_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/login_button"
+        android:layout_alignTop="@+id/imageView"
+        android:layout_marginEnd="60dp"
+        android:layout_marginTop="13dp"
+        android:text="@string/byMohamedDer"
+        android:textColor="@color/cardview_light_background"
+        android:typeface="sans" />
 
 
 </RelativeLayout>
