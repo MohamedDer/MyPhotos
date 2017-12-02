@@ -10,10 +10,10 @@
         android:id="@+id/albimage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@mipmap/ic_launcher"
-        android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="24dp" />
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="24dp"
+        android:src="@mipmap/ic_launcher" />
 
     <TextView
         android:id="@+id/albname"
@@ -25,7 +25,7 @@
         android:text="This is Just Dummy Text"
         android:textAlignment="center"
         android:textColor="@android:color/white"
-        android:textSize="18dp"
+        android:textSize="19sp"
         android:textStyle="bold" />
 
 </RelativeLayout>

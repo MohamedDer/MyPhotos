@@ -16,7 +16,7 @@
         android:text="@string/albums_head"
         android:textAlignment="center"
         android:textColor="@android:color/white"
-        android:textSize="25dp"
+        android:textSize="25sp"
         tools:layout_editor_absoluteX="4dp"
         tools:layout_editor_absoluteY="32dp" />
 
