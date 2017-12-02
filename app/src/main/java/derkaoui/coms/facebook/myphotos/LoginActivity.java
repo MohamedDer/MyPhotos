@@ -14,24 +14,21 @@ import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
-import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
-import com.facebook.ProfileTracker;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.vstechlab.easyfonts.EasyFonts;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import derkaoui.coms.facebook.myphotos.albums.Album;
+import derkaoui.coms.facebook.myphotos.albums.AlbumPresenter;
+import derkaoui.coms.facebook.myphotos.albums.AlbumsActivity;
+
 public class LoginActivity extends AppCompatActivity {
 
-    static ArrayList<Album> Albums = new ArrayList<>();
+    public static ArrayList<Album> Albums = new ArrayList<>();
     CallbackManager callbackManager = CallbackManager.Factory.create();
 
     @Override
@@ -71,13 +68,12 @@ public class LoginActivity extends AppCompatActivity {
         // Logging button callback registration
         LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("user_photos"));
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
-            private ProfileTracker userTrack;
 
             @Override
             public void onSuccess(LoginResult loginResult) {
                 updateButtonVisibility(gotoalbumsButton);
                 //Getting user's albums
-                getAlbums();
+                AlbumPresenter.getAlbums(LoginActivity.this);
             }
 
             @Override
@@ -103,57 +99,13 @@ public class LoginActivity extends AppCompatActivity {
             button.setVisibility(View.VISIBLE);
     }
 
-    void getAlbums() {
-        GraphRequest request = GraphRequest.newMeRequest(
-                AccessToken.getCurrentAccessToken(),
-                new GraphRequest.GraphJSONObjectCallback() {
-                    @Override
-                    public void onCompleted(JSONObject object, GraphResponse response) {
-                        Albums = new ArrayList<Album>();
-                        try {
-                            JSONArray albums = object.getJSONObject("albums").getJSONArray("data");
-                            getAlbumsArray(albums, Albums);
-
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                });
-        Bundle parameters = new Bundle();
-        parameters.putString("fields", "albums{name,photos{link,images}}");
-        request.setParameters(parameters);
-        request.executeAsync();
-    }
-
-    // Extract albums' data from JSON Arrays to Album ArrayList
-    void getAlbumsArray(JSONArray albums, ArrayList<Album> Albums) {
-        for (int i = 0; i < albums.length(); i++) {
-            //getting Albums names and id
-            try {
-                LoginActivity.Albums.add(new Album(albums.getJSONObject(i).getString("name"), albums.getJSONObject(i).getString("id")));
-                if (albums.getJSONObject(i).has("photos")) {
-                    JSONArray photos = albums.getJSONObject(i).getJSONObject("photos").getJSONArray("data");
-                    for (int j = 0; j < photos.length(); j++) {
-                        //getting Album photos
-                        Albums.get(i).getPhotosUrls().add(j, photos.getJSONObject(j).getJSONArray("images").getJSONObject(0).getString("source"));
-                    }
-                } else {
-                    //setting a default icon if the Album is empty
-                    Albums.get(i).getPhotosUrls().add(getApplicationContext().getResources().getString(R.string.default_album_cover));
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-        }
-    }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         callbackManager.onActivityResult(requestCode, resultCode, data);
     }
+
 
 }
 
