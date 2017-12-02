@@ -7,5 +7,7 @@
     <string name="photos_urls">photos_urls</string>
     <string name="album_name">album_name</string>
     <string name="byMohamedDer">by  MohamedDer</string>
+    <string name="myphotos">My Photos</string>
+    <string name="gotoalbums">Go to my albums</string>
 
 </resources>
