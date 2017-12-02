@@ -1,4 +1,4 @@
-package derkaoui.coms.facebook.myphotos;
+package derkaoui.coms.facebook.myphotos.albums;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +8,8 @@ import android.widget.TextView;
 import com.vstechlab.easyfonts.EasyFonts;
 
 import java.util.ArrayList;
+
+import derkaoui.coms.facebook.myphotos.R;
 
 public class AlbumsActivity extends AppCompatActivity {
 

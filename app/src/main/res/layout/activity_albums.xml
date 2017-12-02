@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/red"
-    tools:context="derkaoui.coms.facebook.myphotos.AlbumsActivity">
+    tools:context="derkaoui.coms.facebook.myphotos.albums.AlbumsActivity">
 
     <TextView
         android:id="@+id/albums_head"

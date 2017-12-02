@@ -26,8 +26,8 @@
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
 
-        <activity android:name=".AlbumsActivity" />
-        <activity android:name=".ImagesActivity"></activity>
+        <activity android:name=".albums.AlbumsActivity" />
+        <activity android:name=".images.ImagesActivity"></activity>
     </application>
 
 </manifest>

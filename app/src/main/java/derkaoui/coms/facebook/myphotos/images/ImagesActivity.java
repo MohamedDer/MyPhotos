@@ -1,4 +1,4 @@
-package derkaoui.coms.facebook.myphotos;
+package derkaoui.coms.facebook.myphotos.images;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +9,8 @@ import android.widget.Toast;
 import com.vstechlab.easyfonts.EasyFonts;
 
 import java.util.ArrayList;
+
+import derkaoui.coms.facebook.myphotos.R;
 
 public class ImagesActivity extends AppCompatActivity {
 
@@ -23,7 +25,7 @@ public class ImagesActivity extends AppCompatActivity {
         photos_urls = getIntent().getStringArrayListExtra(getApplicationContext().getResources().getString(R.string.photos_urls));
         album_name = getIntent().getStringExtra(getApplicationContext().getResources().getString(R.string.album_name));
 
-
+        //Display album's name
         TextView album_nameTextView = (TextView) findViewById(R.id.alb_name);
         album_nameTextView.setText(album_name + "  : ");
         album_nameTextView.setTypeface(EasyFonts.walkwayBold(this));
@@ -34,7 +36,7 @@ public class ImagesActivity extends AppCompatActivity {
             Toast.makeText(this, getApplicationContext().getResources().getString(R.string.empty_album_toast), Toast.LENGTH_SHORT).show();
 
         } else {
-            //Passing the photos' urls the the image adapter if the album isn't emplty
+            //Display album photos
             GridView gr = (GridView) findViewById(R.id.grid2);
             ImagesAdapter im_adapter = new ImagesAdapter(this, photos_urls);
             gr.setAdapter(im_adapter);

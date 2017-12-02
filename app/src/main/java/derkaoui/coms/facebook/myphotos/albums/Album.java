@@ -1,4 +1,4 @@
-package derkaoui.coms.facebook.myphotos;
+package derkaoui.coms.facebook.myphotos.albums;
 
 import android.os.Parcel;
 import android.os.Parcelable;

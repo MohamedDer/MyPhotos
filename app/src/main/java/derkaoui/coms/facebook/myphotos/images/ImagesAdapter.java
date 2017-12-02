@@ -1,4 +1,4 @@
-package derkaoui.coms.facebook.myphotos;
+package derkaoui.coms.facebook.myphotos.images;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -13,6 +13,8 @@ import android.widget.Toast;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+
+import derkaoui.coms.facebook.myphotos.R;
 
 
 public class ImagesAdapter extends BaseAdapter {

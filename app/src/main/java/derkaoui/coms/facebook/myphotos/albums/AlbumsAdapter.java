@@ -1,4 +1,4 @@
-package derkaoui.coms.facebook.myphotos;
+package derkaoui.coms.facebook.myphotos.albums;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,6 +14,9 @@ import android.widget.Toast;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+
+import derkaoui.coms.facebook.myphotos.R;
+import derkaoui.coms.facebook.myphotos.images.ImagesActivity;
 
 
 public class AlbumsAdapter extends BaseAdapter {
