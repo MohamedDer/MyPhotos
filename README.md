@@ -22,7 +22,10 @@ Requirements
 
 Libraries & APIs
 ------
-[Faceook login API](https://developers.facebook.com/docs/facebook-login)  -  [Graph API](https://developers.facebook.com/docs/graph-api/overview)
+- [Faceook login API](https://developers.facebook.com/docs/facebook-login)  
+- [Graph API](https://developers.facebook.com/docs/graph-api/overview)
+- [EasyFonts](https://github.com/vsvankhede/easyfonts?utm_source=android-arsenal.com&utm_medium=referral&utm_campaign=2044)
+- [Picasso](http://square.github.io/picasso/)
 
 
 Developed by
