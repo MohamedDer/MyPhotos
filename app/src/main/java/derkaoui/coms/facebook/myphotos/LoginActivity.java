@@ -23,13 +23,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import derkaoui.coms.facebook.myphotos.albums.Album;
-import derkaoui.coms.facebook.myphotos.albums.AlbumPresenter;
 import derkaoui.coms.facebook.myphotos.albums.AlbumsActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
-    public static ArrayList<Album> Albums = new ArrayList<>();
+    final LoginPresenter loginPresenter = new LoginPresenter();
     CallbackManager callbackManager = CallbackManager.Factory.create();
+    private ArrayList<Album> Albums = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +58,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             protected void onCurrentAccessTokenChanged(AccessToken oldAccessToken, AccessToken currentAccessToken) {
                 if (currentAccessToken == null) {
-                    Albums = new ArrayList<Album>();
+                    Albums = new ArrayList<>();
                     updateButtonVisibility(gotoalbumsButton);
                 }
             }
@@ -73,7 +73,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onSuccess(LoginResult loginResult) {
                 updateButtonVisibility(gotoalbumsButton);
                 //Getting user's albums
-                AlbumPresenter.getAlbums(LoginActivity.this);
+                loginPresenter.getAlbums(LoginActivity.this);
             }
 
             @Override
