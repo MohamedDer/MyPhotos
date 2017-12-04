@@ -1,4 +1,4 @@
-package derkaoui.coms.facebook.myphotos;
+package derkaoui.coms.facebook.myphotos.login;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -13,6 +13,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import derkaoui.coms.facebook.myphotos.R;
 import derkaoui.coms.facebook.myphotos.albums.Album;
 
 
@@ -22,7 +23,6 @@ import derkaoui.coms.facebook.myphotos.albums.Album;
 
 public class LoginPresenter {
 
-    private ArrayList<Album> Albums;
 
     void getAlbums(final Activity activity) {
         GraphRequest request = GraphRequest.newMeRequest(
@@ -30,7 +30,7 @@ public class LoginPresenter {
                 new GraphRequest.GraphJSONObjectCallback() {
                     @Override
                     public void onCompleted(JSONObject object, GraphResponse response) {
-                        Albums = new ArrayList<Album>();
+                        ArrayList<Album> Albums = new ArrayList<>();
                         try {
                             JSONArray albumsJSArray = object.getJSONObject("albums").getJSONArray("data");
                             getAlbumsArray(albumsJSArray, Albums, activity);

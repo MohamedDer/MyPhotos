@@ -1,4 +1,4 @@
-package derkaoui.coms.facebook.myphotos;
+package derkaoui.coms.facebook.myphotos.login;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,6 +22,7 @@ import com.vstechlab.easyfonts.EasyFonts;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import derkaoui.coms.facebook.myphotos.R;
 import derkaoui.coms.facebook.myphotos.albums.Album;
 import derkaoui.coms.facebook.myphotos.albums.AlbumsActivity;
 
