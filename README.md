@@ -11,12 +11,12 @@ My Photos :camera: is an Android app that allows you to explore your Facebook al
 Screenshots & Demo
 ------
 
- :globe_with_meridians:  https://drive.google.com/open?id=1vDx-CBs2hpW9Rbaq7ErIRXbj4E9YIh9W
+ :globe_with_meridians: [Click here to see the magic !](https://drive.google.com/open?id=1vDx-CBs2hpW9Rbaq7ErIRXbj4E9YIh9W)   
  
  
 Requirements
 ------
-* Android 5.0 or newer version 
+* Android 5.0 or above
 * Facebook account, obviously :bowtie:
 
 
