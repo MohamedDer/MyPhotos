@@ -1,7 +1,7 @@
 # MyPhotos  
-
-![alt text](https://github.com/MohamedDer/MyPhotos/blob/master/app/src/main/res/mipmap-xxhdpi/ic_launcher.png "My Photos")
-
+<p align="center"> 
+<img src="https://github.com/MohamedDer/MyPhotos/blob/master/app/src/main/res/mipmap-xxhdpi/ic_launcher.png">
+</p>
 
 Description
 ------
@@ -10,8 +10,9 @@ My Photos :camera: is an Android app that allows you to explore your Facebook al
 
 Demo
 ------
-![alt text](https://github.com/MohamedDer/MyPhotos/blob/master/screenshots/demo.gif "My Photos demo gif")   
- 
+ <p align="center"> 
+<img src="https://github.com/MohamedDer/MyPhotos/blob/master/screenshots/demo.gif">
+</p>
  
 Requirements
 ------
