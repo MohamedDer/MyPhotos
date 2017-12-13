@@ -1,18 +1,18 @@
 # MyPhotos  
-
-![alt text](https://github.com/MohamedDer/MyPhotos/blob/master/app/src/main/res/mipmap-xxhdpi/ic_launcher.png "My Photos")
-
+<p align="center"> 
+<img src="https://github.com/MohamedDer/MyPhotos/blob/master/app/src/main/res/mipmap-xxhdpi/ic_launcher.png">
+</p>
 
 Description
 ------
 My Photos :camera: is an Android app that allows you to explore your Facebook albums and photos. It gives you a similar interface to the default system's gallery app, so you can navigate your photos in a simple way.
 
 
-Screenshots & Demo
+Demo
 ------
-
- :globe_with_meridians: [Click here to see the magic !](https://drive.google.com/open?id=1vDx-CBs2hpW9Rbaq7ErIRXbj4E9YIh9W)   
- 
+ <p align="center"> 
+<img src="https://github.com/MohamedDer/MyPhotos/blob/master/screenshots/demo.gif">
+</p>
  
 Requirements
 ------
@@ -31,6 +31,5 @@ Libraries & APIs
 Developed by
 ------
 Mohamed Derkaoui  -  medder12@gmail.com
-
 
 Feel free to contact me for any useful contribution !
